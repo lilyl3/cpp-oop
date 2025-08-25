@@ -12,28 +12,3 @@ The first player to land exactly on the final cell (e.g., cell 100) is declared 
 3. Can a player overshoot the board and win?
 4. Should the dice rolls be simulated by code or taken in as input?
 5. Which player starts first?
-
-## Design
-2. Board
-- State:
-    - snakeLadderPositions: map<int, int>
-- Methods:
-    - int getCellPosition(int position)
-3. Player
-- State:
-    - name
-    - position
-- Methods:
-    - string getPlayerName()
-    - int getPlayerPosition()
-    - int setPlayerPosition()
-4. Game
-- State:
-    - Board
-    - vector<Player> Players
-    - int currentPlayer
-- Methods:
-    - int rollDice()
-    - int computePlayerPosition()
-    - void startGame()
-
