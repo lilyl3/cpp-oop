@@ -1,19 +1,19 @@
-#include "../include/player.h"
+#include "player.h"
 #include <string>
 using namespace std;
 
-string getPlayerId() const{
+string Player::getPlayerId() const{
     return id;
 }
 
-int getPlayerPosition() const{
+int Player::getPlayerPosition() const{
     return position;
 }
 
-void resetPlayerPosition(){
+void Player::resetPlayerPosition(){
     position = 1;
 }
 
-void setPlayerPosition(int newPosition){
+void Player::setPlayerPosition(int newPosition){
     position = newPosition;
 }

@@ -1,4 +1,4 @@
-#include "../include/board.h"
+#include "board.h"
 #include <map>
 #include <set>
 #include <stdexcept>
@@ -14,7 +14,7 @@ Board::Board(
     }
 }
 
-bool Board::isValidPosition(set<int> &configuredCells, int cellPosition, int newPosition) {
+bool Board::isValidPosition(set<int> &configuredCells, int cellPosition, int newPosition) const{
     // All configured snake/ladder positions should be within the board
     if (cellPosition < 1 || cellPosition > boardSize) return false;
     if (newPosition < 1 || newPosition > boardSize) return false;
@@ -45,8 +45,8 @@ bool Board::isValidBoard() const {
 }
 
 int Board::getCellPosition(int position) const {
-    if (snakePositions.find(position) != snakePositions.end()) return snakePositions[position];
-    if (ladderPositions.find(position) != ladderPositions.end()) return ladderPositions[position];
+    if (snakePositions.find(position) != snakePositions.end()) return snakePositions.at(position);
+    if (ladderPositions.find(position) != ladderPositions.end()) return ladderPositions.at(position);
     return position;
 }
 

@@ -1,9 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Board.h"
-#include "Dice.h"
-#include "Player.h"
+#include "board.h"
+#include "dice.h"
+#include "player.h"
 #include <vector>
 #include <map>
 #include <string>
@@ -14,7 +14,7 @@ class Game {
         Board board;
         Dice dice;
         vector<Player*> players;
-        int currentPlayerIdx = 0;
+        int currentPlayerIdx;
 
         string getWinningPlayerId() const;
         Player* getCurrentPlayer() const;

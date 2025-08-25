@@ -1,4 +1,4 @@
-#include "../include/dice.h"
+#include "dice.h"
 #include <random>
 #include <ctime>
 using namespace std;

@@ -8,7 +8,7 @@ class Board {
         std::map<int, int> snakePositions, ladderPositions;
         int boardSize;
         bool isValidBoard() const;
-        bool isValidPosition(set<int> &, int, int);
+        bool isValidPosition(std::set<int> &, int, int) const;
     public:
         Board(const std::map<int, int>&, const std::map<int, int>&, int size);
         int getCellPosition(int) const;
