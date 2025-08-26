@@ -32,10 +32,17 @@ Player* Game::getCurrentPlayer() const{
 
 void Game::playerMove() {
     Player* player = getCurrentPlayer();
-    int newPosition = player->getPlayerPosition() + dice.roll();
+    int step = dice.roll();
+    int newPosition = player->getPlayerPosition() + step;
+
+    cout << "\nPlayer " << player->getPlayerId() << " is currently at: " << player->getPlayerPosition() << endl;
+    cout << "Player " << player->getPlayerId() << " rolls " << step << endl;
+
     if (newPosition > board.getBoardSize()) return;
     else {
-        player->setPlayerPosition(board.getCellPosition(newPosition));
+        newPosition = board.getCellPosition(newPosition);
+        player->setPlayerPosition(newPosition);
+        cout << "Player " << player->getPlayerId() << " is now at position " << player->getPlayerPosition() << endl;
     }
 }
 
@@ -61,5 +68,5 @@ void Game::startGame() {
         if (doesPlayerWin()) break;
         setNextPlayer();
     }
-    cout << "Congratulations to " << getWinningPlayerId() << endl;
+    cout << "Congratulations player " << getWinningPlayerId() << " won!" << endl;
 }

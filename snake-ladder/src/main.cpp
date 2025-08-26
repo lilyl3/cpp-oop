@@ -8,16 +8,17 @@ int main(){
     
     map<int, int> ladders, snakes;
     ladders = {
-        {1, 7},
         {5, 8},
         {6, 10},
     };
     snakes = {
         {8, 4},
         {3, 1},
-        {9, 4},
+        {11, 6},
     };
 
-    Game game = Game(players, ladders, snakes, 10);
+    Game game = Game(players, ladders, snakes, 15);
     game.startGame();
 }
+
+// g++ -Iinclude -std=c++17 src/*.cpp -o myprogram

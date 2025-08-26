@@ -1,4 +1,5 @@
 #include "board.h"
+#include <iostream>
 #include <map>
 #include <set>
 #include <stdexcept>
@@ -45,8 +46,14 @@ bool Board::isValidBoard() const {
 }
 
 int Board::getCellPosition(int position) const {
-    if (snakePositions.find(position) != snakePositions.end()) return snakePositions.at(position);
-    if (ladderPositions.find(position) != ladderPositions.end()) return ladderPositions.at(position);
+    if (snakePositions.find(position) != snakePositions.end()) {
+        cout << "Player landed on a snake! Moving to position: " << snakePositions.at(position) << endl;
+        return snakePositions.at(position);
+    }
+    if (ladderPositions.find(position) != ladderPositions.end()) {
+        cout << "Player landed on a ladder! Moving to position: " << ladderPositions.at(position) << endl;
+        return ladderPositions.at(position);
+    }
     return position;
 }
 
