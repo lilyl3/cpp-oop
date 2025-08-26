@@ -5,7 +5,7 @@
 #include <set>
 class Board {
     private:
-        std::map<int, int> snakePositions, ladderPositions;
+        std::map<int, int> ladderPositions, snakePositions;
         int boardSize;
         bool isValidBoard() const;
         bool isValidPosition(std::set<int> &, int, int) const;

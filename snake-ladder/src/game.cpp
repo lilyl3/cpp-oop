@@ -14,7 +14,7 @@ Game::Game(
     const map<int, int> &ladderPositions, 
     const map<int, int> &snakePositions, 
     int boardSize
-) : currentPlayerIdx(0), players(players), board(ladderPositions, snakePositions, boardSize), dice() {
+) : board(ladderPositions, snakePositions, boardSize), dice(), players(players), currentPlayerIdx(0){
     if (players.size() < 2) {
         throw invalid_argument("Game must have at least 2 players.");
     }
