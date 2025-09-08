@@ -12,7 +12,7 @@ class DoublyLinkedList {
 
         void add(Node<K,V>* node);          // Add node to the front (most recently used)
         void update(Node<K,V>* node);       // Move existing node to the front
-        K removeLast();                     // Remove and return key of least recently used node (tail)
+        Node<K,V>* removeLast();            // Remove and return key of least recently used node (tail)
 };
 
 #endif

@@ -37,12 +37,11 @@ void DoublyLinkedList<K,V>::update(Node<K,V>* node) {
 }
 
 template<typename K, typename V>
-K DoublyLinkedList<K,V>::removeLast() {
+Node<K,V>* DoublyLinkedList<K,V>::removeLast() {
     if (!tail) throw logic_error("The list is empty.");
     // check if cache entry is the tail (i.e. least recently used)
     if (tail->next) throw logic_error("The 'tail' is not the tail of the list.");
 
-    K key = tail->key;
     Node<K,V>* temp = tail;
     if (head == tail) {
         // removing single cache entry
@@ -55,6 +54,5 @@ K DoublyLinkedList<K,V>::removeLast() {
         tail = tail->prev;
         tail->next = nullptr;
     }
-    delete temp;
-    return key;
+    return temp;
 }

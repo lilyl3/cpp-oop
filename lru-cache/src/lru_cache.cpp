@@ -32,8 +32,9 @@ V LRUCache<K,V>::get(K key) {
 // Only called when overcapacity
 template<typename K, typename V>
 void LRUCache<K,V>::evict() {
-    K lruKey = history.removeLast();
-    hashMap.erase(lruKey);
+    Node<K,V>* lruNode = history.removeLast();
+    hashMap.erase(lruNode->key);
+    delete lruNode;
 }
 
 // Insert or update key-value pair
