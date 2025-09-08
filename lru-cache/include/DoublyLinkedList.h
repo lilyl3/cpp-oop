@@ -1,7 +1,7 @@
 #ifndef DOUBLY_LINKED_LIST_H
 #define DOUBLY_LINKED_LIST_H
 
-#include "Node.h"
+#include "node.h"
 
 template<typename K, typename V>
 class DoublyLinkedList {

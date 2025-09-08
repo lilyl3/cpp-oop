@@ -4,8 +4,8 @@
 #include <map>
 #include <mutex>
 
-#include "Node.h"
-#include "DoublyLinkedList.h"
+#include "node.h"
+#include "doublyLinkedList.h"
 
 template<typename K, typename V>
 class LRUCache {
