@@ -41,9 +41,10 @@ int removeLast()            // Remove and return key of least recently used node
 
 3. LRUCache
 ```cpp
+// Add thread-safe mutex
 int capacity, size
 DoublyLinkedList history
-map<int, Node*> HashMap
+map<int, Node*> hashMap
 
 auto get(int key)                   // Retrieve value if key exists, else null
 void put(int key, auto value)       // Insert or update key-value pair
