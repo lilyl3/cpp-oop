@@ -43,6 +43,7 @@ K DoublyLinkedList<K,V>::removeLast() {
     if (tail->next) throw logic_error("The 'tail' is not the tail of the list.");
 
     K key = tail->key;
+    Node<K,V>* temp = tail;
     if (head == tail) {
         // removing single cache entry
         head = nullptr;
@@ -54,5 +55,6 @@ K DoublyLinkedList<K,V>::removeLast() {
         tail = tail->prev;
         tail->next = nullptr;
     }
+    delete temp;
     return key;
 }

@@ -20,7 +20,7 @@ class LRUCache {
     public:
         LRUCache(int capacity) : capacity(capacity), size(0) {}
 
-        V* get(K key);                       // Retrieve value if key exists, else null
+        V get(K key);                      // Retrieve value if key exists, else null
         void put(K key, V value);           // Insert or update key-value pair
 };
 
