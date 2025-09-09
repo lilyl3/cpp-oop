@@ -13,7 +13,7 @@ class LRUCache {
         int capacity, size;
         DoublyLinkedList<K,V> history;
         std::map<K, Node<K,V>*> hashMap;
-        std::mutex mux;
+        std::mutex cacheMutex;
 
         void evict();                        // Remove least recently used entry if over capacity
 

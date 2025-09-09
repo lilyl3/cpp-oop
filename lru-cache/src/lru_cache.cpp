@@ -3,6 +3,7 @@
 #include "lru_cache.h"
 
 #include <stdexcept>
+#include <mutex>
 #include <type_traits>
 
 using namespace std;
@@ -10,6 +11,8 @@ using namespace std;
 // templates are instantiated @ compile time
 template<typename K, typename V>
 V LRUCache<K,V>::get(K key) {
+    lock_guard<mutex> lock(cacheMutex);
+
     auto it = hashMap.find(key);
     
     if (it == hashMap.end()) {
@@ -40,6 +43,8 @@ void LRUCache<K,V>::evict() {
 // Insert or update key-value pair
 template<typename K, typename V>
 void LRUCache<K,V>::put(K key, V value) {
+    lock_guard<mutex> lock(cacheMutex);
+
     auto it = hashMap.find(key);
     if (it != hashMap.end()){
         // update existing cache entry
