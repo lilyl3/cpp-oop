@@ -6,7 +6,7 @@ class Node {
     public:
         K key;
         V value;
-        Node<K, V>* prev, next;
+        Node<K, V>* prev, *next;
         Node(K key, V value) : key(key), value(value), prev(nullptr), next(nullptr) {}
 };
 
