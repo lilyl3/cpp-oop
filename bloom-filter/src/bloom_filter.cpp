@@ -1,8 +1,6 @@
 #include <vector>
 
-#include "bloom_filter.h"
-#include "bit_array.h"
-#include "hash_function.h"
+#include "bloom_lib.h"
 
 using namespace std;
 
