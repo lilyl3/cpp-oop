@@ -44,8 +44,8 @@ Bloom filter should support generic types but initially assume `int`.
 int size;
 bool* bits; // dynamically allocate => returns a pointer
 
-void setBits(<vector> positions);
-bool areAllBitsSet(<vector> positions);
+void setBits(vector<int> positions);
+bool areAllBitsSet(vector<int> positions);
 ```
 
 2. HashFunction
