@@ -50,7 +50,7 @@ bool areAllBitsSet(vector<int> positions);
 
 2. HashFunction
 ```cpp
-// Abstract
+// Interface
 virtual int hash(int element) = 0;
 ```
 
