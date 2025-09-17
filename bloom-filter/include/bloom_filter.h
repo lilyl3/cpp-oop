@@ -8,12 +8,11 @@
 class BloomFilter {
     private:
         BitArray bitArray;
-        int k;  // number of hash functions
         std::vector<HashFunction*> hashFunctions;
 
-        void computeHash(vector<int>&, int);
+        void computeHash(std::vector<int>&, int);
     public:
-        BloomFilter(int, int, const std::vector<HashFunction*>&);
+        BloomFilter(int, const std::vector<HashFunction*>&);
         void addElement(int);
         bool mightContain(int);
 };

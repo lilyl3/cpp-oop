@@ -4,8 +4,8 @@
 
 using namespace std;
 
-BloomFilter::BloomFilter(int m, int k, const vector<HashFunction*>& hashFunctions)
-    : bitArray(m), k(k), hashFunctions(hashFunctions) {
+BloomFilter::BloomFilter(int m, const vector<HashFunction*>& hashFunctions)
+    : bitArray(m), hashFunctions(hashFunctions) {
 }
 
 // Helper function to compute all k hash values of the given element
