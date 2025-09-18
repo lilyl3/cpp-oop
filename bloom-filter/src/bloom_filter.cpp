@@ -1,4 +1,4 @@
-#include <vector>
+#include <mutex>
 
 #include "bloom_lib.h"
 
@@ -20,6 +20,8 @@ void BloomFilter::computeHash(vector<int>& positions, int element) {
 void BloomFilter::addElement(int element) {
     vector<int> positions;
     computeHash(positions, element);
+
+    lock_guard<mutex> lock(mux);
     bitArray.setBits(positions);
 }
 
@@ -29,5 +31,7 @@ void BloomFilter::addElement(int element) {
 bool BloomFilter::mightContain(int element) {
     vector<int> positions;
     computeHash(positions, element);
+
+    lock_guard<mutex> lock(mux);
     return bitArray.areAllBitsSet(positions);
 }

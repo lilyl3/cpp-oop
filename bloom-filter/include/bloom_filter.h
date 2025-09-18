@@ -2,6 +2,8 @@
 #define BLOOM_FILTER_H
 
 #include <vector>
+#include <mutex>
+
 #include "bit_array.h"
 #include "hash_function.h"
 
@@ -9,6 +11,7 @@ class BloomFilter {
     private:
         BitArray bitArray;
         std::vector<HashFunction*> hashFunctions;
+        std::mutex mux;
 
         void computeHash(std::vector<int>&, int);
     public:
