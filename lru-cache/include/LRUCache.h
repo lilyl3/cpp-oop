@@ -9,8 +9,8 @@
 
 using namespace std;
 
-#include "node.h"
-#include "doublyLinkedList.h"
+#include "Node.h"
+#include "DoublyLinkedList.h"
 
 template<typename K, typename V>
 class LRUCache {

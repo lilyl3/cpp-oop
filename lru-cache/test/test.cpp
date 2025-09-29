@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <future>
 
-#include "lru_cache.h"
+#include "LRUCache.h"
 
 using namespace std;
 

@@ -1,7 +1,7 @@
 #ifndef DOUBLY_LINKED_LIST_H
 #define DOUBLY_LINKED_LIST_H
 
-#include "node.h"
+#include "Node.h"
 #include <stdexcept>
 
 using namespace std;
