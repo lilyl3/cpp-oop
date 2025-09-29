@@ -41,7 +41,11 @@ jobs:
               -o bloom_filter
 
       - name: Run tests
-        run: ./bloom_filter
+        run: |
+          cd bloom-filter/
+          ./bloom_filter
 
       - name: Clean
-        run: rm ./bloom_filter
+        run: |
+          cd bloom-filter/
+          rm ./bloom_filter
