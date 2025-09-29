@@ -1,0 +1,51 @@
+name: lru-cache
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - '.github/workflows/lruCache.yml'
+      - 'lru-cache/**'
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - '.github/workflows/lruCache.yml'
+      - 'lru-cache/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtest-dev cmake build-essential
+
+          export GTEST_DIR=$(mktemp -d)
+          echo "GTEST_DIR=$GTEST_DIR" >> $GITHUB_ENV
+          cp -r /usr/src/gtest/* $GTEST_DIR/
+          mkdir -p $GTEST_DIR/build
+          cd $GTEST_DIR/build
+          cmake ..
+          make
+
+      - name: Build
+        run: |
+          cd lru-cache/
+          g++ -std=c++17 -Wall -Wextra -Iinclude -pthread \
+              test/test.cpp \
+              $GTEST_DIR/build/lib/libgtest.a \
+              $GTEST_DIR/build/lib/libgtest_main.a \
+              -o lru_cache
+
+      - name: Run tests
+        run: |
+          cd lru-cache/
+          ./lru_cache
+
+      - name: Clean
+        run: |
+          cd lru-cache/
+          rm ./lru_cache
