@@ -64,3 +64,9 @@ vector<HashFunction*> hashFunctions;
 void addElement(int element)
 bool mightContain(int element);
 ```
+
+## Test
+To run gtests, run:
+```cpp
+make
+```
