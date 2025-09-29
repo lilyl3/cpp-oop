@@ -24,14 +24,23 @@ class LRUCache {
 
     public:
         LRUCache(int capacity) : capacity(capacity), size(0) {}
+        ~LRUCache();
 
-        V get(K key);                      // Retrieve value if key exists, else null
+        V* get(K key);                      // Retrieve pointer to value if key exists, else null
         void put(K key, V value);           // Insert or update key-value pair
 };
 
-// templates are instantiated @ compile time
+// Note: Templates are instantiated @ compile time
 template<typename K, typename V>
-V LRUCache<K,V>::get(K key) {
+LRUCache<K,V>::~LRUCache<K,V>(){
+    for (auto& pair : hashMap) {
+        delete pair.second; // deallocate
+    }
+    hashMap.clear();
+}
+
+template<typename K, typename V>
+V* LRUCache<K,V>::get(K key) {
     lock_guard<mutex> lock(cacheMutex);
 
     auto it = hashMap.find(key);
@@ -39,17 +48,17 @@ V LRUCache<K,V>::get(K key) {
         // constexpr evaluates expression @ compile time, not run time
         // chooses which branch to compile
         if constexpr (is_same_v<V, string>) {
-            return "";
+            return nullptr;
         } else if constexpr (is_same_v<V, int> || is_same_v<V, double>){
-            return static_cast<V>(-1);
+            return nullptr;
         } else {
             throw invalid_argument("Unsupported type.");
         }
     }
-    cout << "cache get key: " << key << ", value: " << it->second->value << endl;
+    // cout << "cache get key: " << key << ", value: " << it->second->value << endl;
     // update most recently used
     history.update(it->second);
-    return it->second->value;
+    return &it->second->value;
 }
 
 // Remove least recently used entry
@@ -57,7 +66,7 @@ V LRUCache<K,V>::get(K key) {
 template<typename K, typename V>
 void LRUCache<K,V>::evict() {
     Node<K,V>* lruNode = history.removeLast();
-    cout << "Removed key " << lruNode->key << " from the cache." << endl;
+    // cout << "Removed key " << lruNode->key << " from the cache." << endl;
     hashMap.erase(lruNode->key);
     delete lruNode;
 }
@@ -67,7 +76,7 @@ template<typename K, typename V>
 void LRUCache<K,V>::put(K key, V value) {
     lock_guard<mutex> lock(cacheMutex);
 
-    cout << "cache put key: " << key << ", value: " << value << endl;
+    // cout << "cache put key: " << key << ", value: " << value << endl;
 
     auto it = hashMap.find(key);
     if (it != hashMap.end()){
