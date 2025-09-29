@@ -3,8 +3,12 @@ name: snake-and-ladders
 on:
   push:
     branches: [ "master" ]
+    paths:
+      - 'snake-ladder/**'
   pull_request:
     branches: [ "master" ]
+    paths:
+      - 'snake-ladder/**'
 
 jobs:
   build:
