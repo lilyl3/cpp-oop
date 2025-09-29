@@ -31,14 +31,17 @@ jobs:
           cmake ..
           make
 
+      - name: List gtest libs
+        run: ls -l $GTEST_DIR/build/lib
+
       - name: Build
         run: |
           cd lru-cache/
           g++ -std=c++17 -Wall -Wextra -Iinclude -pthread \
               test/test.cpp \
-              $GTEST_DIR/build/lib/libgtest.a \
-              $GTEST_DIR/build/lib/libgtest_main.a \
+              -L$GTEST_DIR/build/lib -lgtest -lgtest_main \
               -o lru_cache
+
 
       - name: Run tests
         run: |
