@@ -36,12 +36,11 @@ jobs:
 
       - name: Build
         run: |
-          cd lru-cache/
+          cd lru-cache
           g++ -std=c++17 -Wall -Wextra -Iinclude -pthread \
               test/test.cpp \
               -L$GTEST_DIR/build/lib -lgtest -lgtest_main \
               -o lru_cache
-
 
       - name: Run tests
         run: |
