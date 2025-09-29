@@ -9,12 +9,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4   # clone repo into runner environment
+      - uses: actions/checkout@v3
 
-    - name: "Build and run tests"
-      run: |
-        cd bloom-filter
-        make
-        make clean
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtest-dev cmake
+          cd /usr/src/gtest
+          sudo cmake .
+          sudo make
+          sudo cp *.a /usr/lib
+
+      - name: Build
+        run: |
+          g++ -std=c++17 -Wall -Wextra -Iinclude -pthread \
+              src/*.cpp test/test.cpp \
+              -lgtest -lgtest_main -o bloom_filter
+
+      - name: Run tests
+        run: ./bloom_filter
+
+      - name: Clean
+        run: rm ./bloom_filter
