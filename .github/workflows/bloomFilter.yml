@@ -4,10 +4,12 @@ on:
   push:
     branches: [ "master" ]
     paths:
+      - '.github/workflows/bloomFilter.yml'
       - 'bloom-filter/**'
   pull_request:
     branches: [ "master" ]
     paths:
+      - '.github/workflows/bloomFilter.yml'
       - 'bloom-filter/**'
 
 jobs:
@@ -22,6 +24,7 @@ jobs:
           sudo apt-get install -y libgtest-dev cmake build-essential
 
           export GTEST_DIR=$(mktemp -d)
+          echo "GTEST_DIR=$GTEST_DIR" >> $GITHUB_ENV
           cp -r /usr/src/gtest/* $GTEST_DIR/
           mkdir -p $GTEST_DIR/build
           cd $GTEST_DIR/build
@@ -30,6 +33,7 @@ jobs:
 
       - name: Build
         run: |
+          cd bloom-filter/
           g++ -std=c++17 -Wall -Wextra -Iinclude -pthread \
               src/*.cpp test/test.cpp \
               $GTEST_DIR/build/lib/libgtest.a \
