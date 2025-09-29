@@ -3,8 +3,12 @@ name: bloom-filter
 on:
   push:
     branches: [ "master" ]
+    paths:
+      - 'bloom-filter/**'
   pull_request:
     branches: [ "master" ]
+    paths:
+      - 'bloom-filter/**'
 
 jobs:
   build:
@@ -17,10 +21,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libgtest-dev cmake build-essential
 
-          # Copy gtest source to workspace and build
-          cp -r /usr/src/gtest $HOME/gtest
-          mkdir -p $HOME/gtest/build
-          cd $HOME/gtest/build
+          # Use a dedicated subdirectory to avoid conflicts
+          mkdir -p $HOME/gtest-src
+          cp -r /usr/src/gtest/* $HOME/gtest-src/
+          
+          mkdir -p $HOME/gtest-src/build
+          cd $HOME/gtest-src/build
           cmake ..
           make
 
@@ -28,8 +34,8 @@ jobs:
         run: |
           g++ -std=c++17 -Wall -Wextra -Iinclude -pthread \
               src/*.cpp test/test.cpp \
-              $HOME/gtest/build/lib/libgtest.a \
-              $HOME/gtest/build/lib/libgtest_main.a \
+              $HOME/gtest-src/build/lib/libgtest.a \
+              $HOME/gtest-src/build/lib/libgtest_main.a \
               -o bloom_filter
 
       - name: Run tests
