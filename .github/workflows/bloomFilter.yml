@@ -17,20 +17,20 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libgtest-dev cmake build-essential
 
-          # Build gtest
-          mkdir -p /usr/src/gtest/build
-          cd /usr/src/gtest/build
-          sudo cmake ..
-          sudo make
+          # Copy gtest source to workspace and build
+          cp -r /usr/src/gtest $HOME/gtest
+          mkdir -p $HOME/gtest/build
+          cd $HOME/gtest/build
+          cmake ..
+          make
 
       - name: Build
         run: |
           g++ -std=c++17 -Wall -Wextra -Iinclude -pthread \
               src/*.cpp test/test.cpp \
-              /usr/src/gtest/build/lib/libgtest.a \
-              /usr/src/gtest/build/lib/libgtest_main.a \
+              $HOME/gtest/build/lib/libgtest.a \
+              $HOME/gtest/build/lib/libgtest_main.a \
               -o bloom_filter
-
 
       - name: Run tests
         run: ./bloom_filter
