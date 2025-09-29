@@ -31,8 +31,8 @@ jobs:
           cmake ..
           make
 
-      - name: List gtest libs
-        run: ls -l $GTEST_DIR/build/lib
+      - name: Debug includes
+        run: ls -l lru-cache/include
 
       - name: Build
         run: |
