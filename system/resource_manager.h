@@ -5,9 +5,6 @@ class ResourceManager {
 private:
     int* data;
     unsigned int size;
-
-    void resetData(int*);
-    void setSize(unsigned int);
 public:
     // Destructor
     ~ResourceManager();
